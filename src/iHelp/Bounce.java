@@ -14,8 +14,8 @@ public class Bounce extends Applet implements Runnable
         {
             redDemo=new Demo(300,150,30,45,2,4);
             Back=new Demo(1,1,1000,650,0,0);
-            I=getImage(getCodeBase(),"Campus.png");
-            img =getImage(getDocumentBase(),"pin.png");
+            I=getImage(getCodeBase(),"..\\img\\Campus.png");
+            img =getImage(getDocumentBase(),"..\\img\\pin.png");
             Thread t=new Thread(this);
             t.start();
         }

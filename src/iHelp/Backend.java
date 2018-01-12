@@ -12,7 +12,7 @@ public class Backend {
 		MaxentTagger tagger = new MaxentTagger("taggers/left3words-wsj-0-18.tagger");
 		
 		// The sample string		 
-		String sample = "Where can i find vice principal's office";
+		String sample = "Where can i find vice principals office";
 		 
 		// The tagged string		 
 		String tagged = tagger.tagString(sample);
