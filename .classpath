@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.1%Foundation-1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/stanford-postagger.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/JARVIS-API.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/javaFlacEncoder-0.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/org.json-20120521.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/jsapi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/cmudict04.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/cmulex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/en_us.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/freetts.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/mbrola.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
