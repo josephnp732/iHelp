@@ -2,15 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/stanford-postagger.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/JARVIS-API.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/javaFlacEncoder-0.3.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/org.json-20120521.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/guava-22.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/marytts-builder-5.2-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/marytts-lang-en-5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/voice-cmu-rms-hsmm-5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/voice-cmu-slt-hsmm-5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mr. Byte/Documents/GitHub/iHelp/jars/voice-dfki-poppy-hsmm-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/guava-22.0.jar"/>
+	<classpathentry kind="lib" path="lib/JARVIS-API.jar"/>
+	<classpathentry kind="lib" path="lib/javaFlacEncoder-0.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/marytts-builder-5.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/marytts-lang-en-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="lib/org.json-20120521.jar"/>
+	<classpathentry kind="lib" path="lib/stanford-postagger.jar"/>
+	<classpathentry kind="lib" path="lib/voice-cmu-rms-hsmm-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/voice-cmu-slt-hsmm-5.2.jar"/>
+	<classpathentry kind="lib" path="lib/voice-dfki-poppy-hsmm-5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
