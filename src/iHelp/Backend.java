@@ -3,6 +3,7 @@ package iHelp;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ConnectException;
 
 import com.darkprograms.speech.microphone.Microphone;
 import com.darkprograms.speech.recognizer.GoogleResponse;
@@ -33,9 +34,13 @@ import org.w3c.dom.Element;
 
 
 public class Backend {
-
-	public static void main(String[] args) {
+	
+	
+	
+	public static int Dest() {
+	//public static void main(String[] args) {
 		
+		int flag;
 		String fromClause = "";
 		ArrayList <String> whereClause = new ArrayList <String>();
 		
@@ -224,236 +229,242 @@ public class Backend {
 		
 		String tablename = "";
 		Boolean switchStatus = true;
-		String description = "";
-        String destination = ""; 
+		String description = "Sorry! No results found";
+		String destination = "";
         
         
-		if(whereClause.size()>=3) 
-		{
-			switch(fromClause)
-			{
-				case "where": tablename = "LL_LOCATION";	break;
-				case "when": tablename = "TT_TIME";	break;
-				default: tablename = "RR_REST";
-			}
-		outer1: for(String key1: whereClause)
-		        {
-		        
-			        for(String key2: whereClause)
-					{
-				inner1:	for(String key3: whereClause)
-						{
-							System.out.println(key1);
-							System.out.println(key2);
-							if(key1.equals(key2))
-								continue inner1;
-							try{
-						      //STEP 2: Register JDBC driver
-						      Class.forName("com.mysql.jdbc.Driver");
-				
-						      //STEP 3: Open a connection
-						      System.out.println("Connecting to a single database...");
-						      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-						      System.out.println("Connected database successfully...");
-						      
-						      //STEP 4: Execute a query
-						      System.out.println("Creating statement...");
-						      stmt = conn.createStatement();
-				
-						      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key1+"' AND SEARCH_KEY2='"+key2+"' AND SEARCH_KEY3='"+key3+"'");
-						      //STEP 5: Extract data from result set
-						      if(!rs.next())
-						      {
-					    		  rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key2+"' AND SEARCH_KEY2='"+key3+"' AND SEARCH_KEY3='"+key1+"'");
-						    	  if(!rs.next())
-							      {
-						    		  rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key3+"' AND SEARCH_KEY2='"+key1+"' AND SEARCH_KEY3='"+key2+"'");
-							    	  if(!rs.next())
-								      {
-							    		  switchStatus = true;
-								    	  continue inner1;
-									  }
-										  
-							      }
-							    	  
-						      }
-						      do{
-						         //Retrieve by column name
-						         description = rs.getString("DESCRIPTION");
-						         destination = rs.getString("DESTINATION");
-				
-						         //Display values
-						         System.out.println("Description: " + description);
-						         System.out.println("Destination: " + destination);
-						         switchStatus = false;
-						      }while(rs.next());
-						      rs.close();
-						      break outer1;
-						   }catch(SQLException se){
-						      //Handle errors for JDBC
-						      se.printStackTrace();
-						   }catch(Exception e){
-						      //Handle errors for Class.forName
-						      e.printStackTrace();
-						   }finally{
-						      //finally block used to close resources
-						      try{
-						         if(stmt!=null)
-						            conn.close();
-						      }catch(SQLException se){
-						      }// do nothing
-						      try{
-						         if(conn!=null)
-						            conn.close();
-						      }catch(SQLException se){
-						         se.printStackTrace();
-						      }//end finally try
-						   }
-					
-						}
-					}
-		        }
-		        
-		}       
-        
-        if (switchStatus && whereClause.size()>=2)
-        {
-        
-			switch(fromClause)
-			{
-				case "where": tablename = "L_LOCATION";	break;
-				case "when": tablename = "T_TIME";	break;
-				default: tablename = "R_REST";
-			}
-	
-	outer:	for(String key1: whereClause)
-			{
-		inner:	for(String key2: whereClause)
-				{
-					System.out.println(key1);
-					System.out.println(key2);
-					if(key1.equals(key2))
-						continue inner;
-					try{
-				      //STEP 2: Register JDBC driver
-				      Class.forName("com.mysql.jdbc.Driver");
-		
-				      //STEP 3: Open a connection
-				      System.out.println("Connecting to a single database...");
-				      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-				      System.out.println("Connected database successfully...");
-				      
-				      //STEP 4: Execute a query
-				      System.out.println("Creating statement...");
-				      stmt = conn.createStatement();
-		
-				      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key1+"' AND SEARCH_KEY2='"+key2+"'");
-				      //STEP 5: Extract data from result set
-				      if(!rs.next())
-				      {
-				    	  switchStatus = true;
-				    	  continue;
-				      }
-				      do{
-				         //Retrieve by column name
-				         description = rs.getString("DESCRIPTION");
-				         destination = rs.getString("DESTINATION");
-		
-				         //Display values
-				         System.out.println("Description: " + description);
-				         System.out.println("Destination: " + destination);
-				         switchStatus = false;
-				      }while(rs.next());
-				      rs.close();
-				      break outer;
-				   }catch(SQLException se){
-				      //Handle errors for JDBC
-				      se.printStackTrace();
-				   }catch(Exception e){
-				      //Handle errors for Class.forName
-				      e.printStackTrace();
-				   }finally{
-				      //finally block used to close resources
-				      try{
-				         if(stmt!=null)
-				            conn.close();
-				      }catch(SQLException se){
-				      }// do nothing
-				      try{
-				         if(conn!=null)
-				            conn.close();
-				      }catch(SQLException se){
-				         se.printStackTrace();
-				      }//end finally try
-				   }
-			
-				}
-			}
+        try {
+        	if(whereClause.size()>=3) 
+    		{
+    			switch(fromClause)
+    			{
+    				case "where": tablename = "LL_LOCATION";	break;
+    				case "when": tablename = "TT_TIME";	break;
+    				default: tablename = "RR_REST";
+    			}
+    		outer1: for(String key1: whereClause)
+    		        {
+    		        
+    			        for(String key2: whereClause)
+    					{
+    				inner1:	for(String key3: whereClause)
+    						{
+    							System.out.println(key1);
+    							System.out.println(key2);
+    							if(key1.equals(key2))
+    								continue inner1;
+    							try{
+    						      //STEP 2: Register JDBC driver
+    						      Class.forName("com.mysql.jdbc.Driver");
+    				
+    						      //STEP 3: Open a connection
+    						      System.out.println("Connecting to a single database...");
+    						      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+    							
+    						      System.out.println("Connected database successfully...");
+    						      
+    						      //STEP 4: Execute a query
+    						      System.out.println("Creating statement...");
+    						      stmt = conn.createStatement();
+    				
+    						      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key1+"' AND SEARCH_KEY2='"+key2+"' AND SEARCH_KEY3='"+key3+"'");
+    						      //STEP 5: Extract data from result set
+    						      if(!rs.next())
+    						      {
+    					    		  rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key2+"' AND SEARCH_KEY2='"+key3+"' AND SEARCH_KEY3='"+key1+"'");
+    						    	  if(!rs.next())
+    							      {
+    						    		  rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key3+"' AND SEARCH_KEY2='"+key1+"' AND SEARCH_KEY3='"+key2+"'");
+    							    	  if(!rs.next())
+    								      {
+    							    		  switchStatus = true;
+    								    	  continue inner1;
+    									  }
+    										  
+    							      }
+    							    	  
+    						      }
+    						      do{
+    						         //Retrieve by column name
+    						         description = rs.getString("DESCRIPTION");
+    						         destination = rs.getString("DESTINATION");
+    				
+    						         //Display values
+    						         System.out.println("Description: " + description);
+    						         System.out.println("Destination: " + destination);
+    						         switchStatus = false;
+    						      }while(rs.next());
+    						      rs.close();
+    						      break outer1;
+    						   }catch(SQLException se){
+    						      //Handle errors for JDBC
+    						      se.printStackTrace();
+    						   }catch(Exception e){
+    						      //Handle errors for Class.forName
+    						      e.printStackTrace();
+    						   }finally{
+    						      //finally block used to close resources
+    						      try{
+    						         if(stmt!=null)
+    						            conn.close();
+    						      }catch(SQLException se){
+    						      }// do nothing
+    						      try{
+    						         if(conn!=null)
+    						            conn.close();
+    						      }catch(SQLException se){
+    						         se.printStackTrace();
+    						      }//end finally try
+    						   }
+    					
+    						}
+    					}
+    		        }
+    		        
+    		}       
+            
+            if (switchStatus && whereClause.size()>=2)
+            {
+            
+    			switch(fromClause)
+    			{
+    				case "where": tablename = "L_LOCATION";	break;
+    				case "when": tablename = "T_TIME";	break;
+    				default: tablename = "R_REST";
+    			}
+    	
+    	outer:	for(String key1: whereClause)
+    			{
+    		inner:	for(String key2: whereClause)
+    				{
+    					System.out.println(key1);
+    					System.out.println(key2);
+    					if(key1.equals(key2))
+    						continue inner;
+    					try{
+    				      //STEP 2: Register JDBC driver
+    				      Class.forName("com.mysql.jdbc.Driver");
+    		
+    				      //STEP 3: Open a connection
+    				      System.out.println("Connecting to a single database...");
+    				      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+    				      System.out.println("Connected database successfully...");
+    				      
+    				      //STEP 4: Execute a query
+    				      System.out.println("Creating statement...");
+    				      stmt = conn.createStatement();
+    		
+    				      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY1='"+key1+"' AND SEARCH_KEY2='"+key2+"'");
+    				      //STEP 5: Extract data from result set
+    				      if(!rs.next())
+    				      {
+    				    	  switchStatus = true;
+    				    	  continue;
+    				      }
+    				      do{
+    				         //Retrieve by column name
+    				         description = rs.getString("DESCRIPTION");
+    				         destination = rs.getString("DESTINATION");
+    		
+    				         //Display values
+    				         System.out.println("Description: " + description);
+    				         System.out.println("Destination: " + destination);
+    				         switchStatus = false;
+    				      }while(rs.next());
+    				      rs.close();
+    				      break outer;
+    				   }catch(SQLException se){
+    				      //Handle errors for JDBC
+    				      se.printStackTrace();
+    				   }catch(Exception e){
+    				      //Handle errors for Class.forName
+    				      e.printStackTrace();
+    				   }finally{
+    				      //finally block used to close resources
+    				      try{
+    				         if(stmt!=null)
+    				            conn.close();
+    				      }catch(SQLException se){
+    				      }// do nothing
+    				      try{
+    				         if(conn!=null)
+    				            conn.close();
+    				      }catch(SQLException se){
+    				         se.printStackTrace();
+    				      }//end finally try
+    				   }
+    			
+    				}
+    			}
+            }
+    		
+    		
+    		if(switchStatus && whereClause.size()>=1)
+    		{
+    			switch(fromClause)
+    			{
+    				case "where": tablename = "LOCATION";	break;
+    				case "when": tablename = "TIME";	break;
+    				default: tablename = "REST";
+    			}
+    			
+    			for(String key: whereClause)
+    			{
+    				try{
+    			      //STEP 2: Register JDBC driver
+    			      Class.forName("com.mysql.jdbc.Driver");
+    	
+    			      //STEP 3: Open a connection
+    			      System.out.println("Connecting to a selected database...");
+    			      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+    			      System.out.println("Connected database successfully...");
+    			      
+    			      //STEP 4: Execute a query
+    			      System.out.println("Creating statement...");
+    			      stmt = conn.createStatement();
+    	
+    			      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY='"+key+"'");
+    			      //STEP 5: Extract data from result set
+    			      if(!rs.next())
+    			    	  continue;
+    			      do{
+    			         //Retrieve by column name
+    			         description = rs.getString("DESCRIPTION");
+    			         destination = rs.getString("DESTINATION");
+    	
+    			         //Display values
+    			         System.out.println("Description: " + description);
+    			         System.out.println("Destination: " + destination);
+    			      }while(rs.next());
+    			      rs.close();
+    			      break;
+    			   }catch(SQLException se){
+    			      //Handle errors for JDBC
+    			      se.printStackTrace();
+    			   }catch(Exception e){
+    			      //Handle errors for Class.forName
+    			      e.printStackTrace();
+    			   }finally{
+    			      //finally block used to close resources
+    			      try{
+    			         if(stmt!=null)
+    			            conn.close();
+    			      }catch(SQLException se){
+    			      }// do nothing
+    			      try{
+    			         if(conn!=null)
+    			            conn.close();
+    			      }catch(SQLException se){
+    			         se.printStackTrace();
+    			      }//end finally try
+    			   }
+
+    			}
+    		}
+        } catch (Exception e) {
+        	System.out.println("Connection to DB failed");
         }
 		
-		
-		if(switchStatus && whereClause.size()>=1)
-		{
-			switch(fromClause)
-			{
-				case "where": tablename = "LOCATION";	break;
-				case "when": tablename = "TIME";	break;
-				default: tablename = "REST";
-			}
-			
-			for(String key: whereClause)
-			{
-				try{
-			      //STEP 2: Register JDBC driver
-			      Class.forName("com.mysql.jdbc.Driver");
-	
-			      //STEP 3: Open a connection
-			      System.out.println("Connecting to a selected database...");
-			      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			      System.out.println("Connected database successfully...");
-			      
-			      //STEP 4: Execute a query
-			      System.out.println("Creating statement...");
-			      stmt = conn.createStatement();
-	
-			      rs = stmt.executeQuery("SELECT * FROM "+tablename+" WHERE SEARCH_KEY='"+key+"'");
-			      //STEP 5: Extract data from result set
-			      if(!rs.next())
-			    	  continue;
-			      do{
-			         //Retrieve by column name
-			         description = rs.getString("DESCRIPTION");
-			         destination = rs.getString("DESTINATION");
-	
-			         //Display values
-			         System.out.println("Description: " + description);
-			         System.out.println("Destination: " + destination);
-			      }while(rs.next());
-			      rs.close();
-			      break;
-			   }catch(SQLException se){
-			      //Handle errors for JDBC
-			      se.printStackTrace();
-			   }catch(Exception e){
-			      //Handle errors for Class.forName
-			      e.printStackTrace();
-			   }finally{
-			      //finally block used to close resources
-			      try{
-			         if(stmt!=null)
-			            conn.close();
-			      }catch(SQLException se){
-			      }// do nothing
-			      try{
-			         if(conn!=null)
-			            conn.close();
-			      }catch(SQLException se){
-			         se.printStackTrace();
-			      }//end finally try
-			   }
-
-			}
-		}
 		
 	    
 		
@@ -463,19 +474,25 @@ public class Backend {
 	    
 	    
 		//START - TEXT-2-SPEECH
+        
+        TTSout ttsout = new TTSout(description);
+        
 		
 		//Create TextToSpeech
-		TextToSpeech tts = new TextToSpeech();
+		//TextToSpeech tts = new TextToSpeech();
 
 				// Setting the Voice
-		tts.setVoice("cmu-rms-hsmm");//Other voices: dfki-poppy-hsmm, cmu-slt-hsmm
+		//tts.setVoice("dfki-poppy-hsmm");//Other voices: dfki-poppy-hsmm, cmu-slt-hsmm, cmu-rms-hsmm
 				
 				// Gresponse is a String variable containing text
-		tts.speak(description, 1.0f, true, true);
+		//tts.speak(description, 2.0f, true, true);
 		
 		//END - TEXT-2-SPEECH
-		
-		
+		flag = Integer.parseInt(destination);
+		return Integer.parseInt(destination);
+        
+        
+	    //return 1;
 	}
 
-	}
+}
