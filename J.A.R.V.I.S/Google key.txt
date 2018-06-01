@@ -1,0 +1,8 @@
+
+
+client id:  634519433350-e5khbs58fg2sbhr81kjup12u3at0nbf1.apps.googleusercontent.com 
+
+client secret:  AQ4fcgmjuOii9LoqawyD389a 
+
+
+API key:  AIzaSyDdUqUPUtaItfEEYTm6sB3XHT4IMsT_GpQ 

@@ -1,0 +1,7 @@
+/bin
+.classpath
+.project
+.settings
+/target
+/.idea
+java-speech-api.iml

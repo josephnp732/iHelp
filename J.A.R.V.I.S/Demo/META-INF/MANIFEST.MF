@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ JARVIS-API.jar java-flac-encoder-0.3.7.jar
+Class-Path: .
+Rsrc-Main-Class: Main
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+
